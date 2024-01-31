@@ -1,0 +1,502 @@
+:root {
+  --color-scheme: dark;
+
+  /* Fonts*/
+  /* --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; */
+  --font-family: system-ui, sans-serif;
+
+  --fs-300: clamp(0.94rem, calc(0.92rem + 0.08vw), 0.98rem);
+  --fs-400: clamp(1.13rem, calc(1.06rem + 0.33vw), 1.31rem);
+  --fs-500: clamp(1.35rem, calc(1.21rem + 0.69vw), 1.75rem);
+  --fs-600: clamp(1.62rem, calc(1.37rem + 1.24vw), 2.33rem);
+  --fs-700: clamp(1.94rem, calc(1.54rem + 2.03vw), 3.11rem);
+  --fs-800: clamp(2.33rem, calc(1.7rem + 3.15vw), 4.14rem);
+  --fs-900: clamp(2.8rem, calc(1.85rem + 4.74vw), 5.52rem);
+
+  /* Colors*/
+  --clr-blue-1: #b0dff5;
+  --clr-blue-2: #76c8ed;
+  --clr-blue-3: #51b9e9;
+  --clr-blue-4: #2aa9e4;
+  --clr-orange-1: #f5c6b0;
+  --clr-orange-2: #ed9b76;
+  --clr-orange-3: #e98151;
+  --clr-orange-4: #e4652a;
+
+  --clr-purple-1: #a2a4dc;
+  --clr-purple-2: #6e72c9;
+  --clr-purple-3: #454ab8;
+  --clr-purple-4: #2f327d;
+  --clr-green-1: #dcdaa2;
+  --clr-green-2: #c9c56e;
+  --clr-green-3: #b8b445;
+  --clr-green-4: #7d7a2f;
+
+  --clr-body: #696984;
+  --clr-green: #33efa0;
+  --clr-red: #f13c3c;
+
+  --clr-grey-1: #464646;
+  --clr-white: #ffffff;
+
+  --shadow-1: 0px 10px 60px 0px rgba(38, 45, 118, 0.08);
+  --shadow-2: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+
+  --media-xxl: 1536px;
+  --media-xl: 1366px;
+  --media-l: 1280px;
+  --media-m: 1024px;
+  --media-s: 768px;
+}
+/*- RESET */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 0 Margins - Paddings - Font */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+/* body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin-block-end: 0;
+} */
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults*/
+body {
+  /*! Pendiente Comprobar min-height */
+  min-height: 100svh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.6;
+  font-family: var(--font-family);
+  font-size: var(--fs-400);
+}
+
+/* Set shorter line heights on headings and interactive elements */
+/*! Hacer pruebas*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-800);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--fs-700);
+  font-weight: 700;
+}
+
+/* Paragraph */
+p {
+  max-width: 70ch;
+  text-wrap: pretty;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+img.full-width {
+  width: 100%;
+  max-height: 45vh;
+  object-fit: cover;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: max(2vw, 1rem);
+}
+nav a {
+  color: inherit;
+  text-decoration: none;
+  font-size: var(--fs-300);
+}
+nav a:hover,
+nav a:focus {
+  color: var(--clr-orange);
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrolling behavior*/
+@media (prefers-reduced-motion: no-performance) {
+  /*! 'html' mejor compatibilidad */
+  :has(:target) /* html */ {
+    scroll-behavior: smooth;
+    /*! Comprobar tamaño*/
+    scroll-padding-top: 3rem;
+  }
+}
+
+/** GRID SISTEM */
+.content-grid {
+  --padding-inline: 2rem;
+  --content-max-width: 1920px;
+  --breakout-max-width: 2220px;
+
+  --breakout-size: calc(
+    (var(--breakout-max-width) - var(--content-max-width)) / 2
+  );
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      100% - (var(--padding-inline) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+.content-grid > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column: content;
+}
+.content-grid > .breakout {
+  grid-column: breakout;
+}
+.content-grid > .full-width {
+  grid-column: full-width;
+
+  display: grid;
+  grid-template-columns: inherit;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  /* margin-bottom: 20px; */
+  /* padding: 0 0 20px 0; */
+  /*! Pendiente de probar*/
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/**PC - TV*/
+.col1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+.col2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.col3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.col4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.col5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+.col6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.col7 {
+  grid-template-columns: repeat(7, 1fr);
+}
+.col8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+.col9 {
+  grid-template-columns: repeat(9, 1fr);
+}
+.col10 {
+  grid-template-columns: repeat(10, 1fr);
+}
+.col11 {
+  grid-template-columns: repeat(11, 1fr);
+}
+.col12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.span1 {
+  grid-column: span 1;
+}
+.span2 {
+  grid-column: span 2;
+}
+.span3 {
+  grid-column: span 3;
+}
+.span4 {
+  grid-column: span 4;
+}
+.span5 {
+  grid-column: span 5;
+}
+.span6 {
+  grid-column: span 6;
+}
+.span7 {
+  grid-column: span 7;
+}
+.span8 {
+  grid-column: span 8;
+}
+.span9 {
+  grid-column: span 9;
+}
+.span10 {
+  grid-column: span 10;
+}
+.span11 {
+  grid-column: span 11;
+}
+.span12 {
+  grid-column: span 12;
+}
+
+/**TABLETS*/
+@media screen and (max-width: 768px) {
+  .mdCol1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .mdCol2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mdCol3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mdCol4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .mdCol5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .mdCol6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .mdCol7 {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .mdCol8 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .mdCol9 {
+    grid-template-columns: repeat(9, 1fr);
+  }
+  .mdCol10 {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .mdCol11 {
+    grid-template-columns: repeat(11, 1fr);
+  }
+  .mdCol12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .mdSpan1 {
+    grid-column: span 1;
+  }
+  .mdSpan2 {
+    grid-column: span 2;
+  }
+  .mdSpan3 {
+    grid-column: span 3;
+  }
+  .mdSpan4 {
+    grid-column: span 4;
+  }
+  .mdSpan5 {
+    grid-column: span 5;
+  }
+  .mdSpan6 {
+    grid-column: span 6;
+  }
+  .mdSpan7 {
+    grid-column: span 7;
+  }
+  .mdSpan8 {
+    grid-column: span 8;
+  }
+  .mdSpan9 {
+    grid-column: span 9;
+  }
+  .mdSpan10 {
+    grid-column: span 10;
+  }
+  .mdSpan11 {
+    grid-column: span 11;
+  }
+  .mdSpan12 {
+    grid-column: span 12;
+  }
+}
+
+/**SMARTPHONES*/
+@media screen and (max-width: 480px) {
+  .smCol1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .smCol2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .smCol3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .smCol4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .smCol5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .smCol6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .smCol7 {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .smCol8 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .smCol9 {
+    grid-template-columns: repeat(9, 1fr);
+  }
+  .smCol10 {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .smCol11 {
+    grid-template-columns: repeat(11, 1fr);
+  }
+  .smCol12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .smSpan1 {
+    grid-column: span 1;
+  }
+  .smSpan2 {
+    grid-column: span 2;
+  }
+  .smSpan3 {
+    grid-column: span 3;
+  }
+  .smSpan4 {
+    grid-column: span 4;
+  }
+  .smSpan5 {
+    grid-column: span 5;
+  }
+  .smSpan6 {
+    grid-column: span 6;
+  }
+  .smSpan7 {
+    grid-column: span 7;
+  }
+  .smSpan8 {
+    grid-column: span 8;
+  }
+  .smSpan9 {
+    grid-column: span 9;
+  }
+  .smSpan10 {
+    grid-column: span 10;
+  }
+  .smSpan11 {
+    grid-column: span 11;
+  }
+  .smSpan12 {
+    grid-column: span 12;
+  }
+}
+
+/* Margins - Paddings*/
+.flow > * + * {
+  margin-top: var(--flow-spacing, 1em);
+}
+.section-padding {
+  padding-block: 2.5rem;
+}
+
+/*! QUITAR EN DEPLOYMENT */
+/* div {
+  border: 1px solid red;
+}
+ */
